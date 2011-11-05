@@ -57,23 +57,3 @@ builder {
     __PACKAGE__->to_app();
 };
 
-__DATA__
-
-@@ index.tt
-<!doctype html>
-<html>
-<head>
-    <met charst="utf-8">
-    <title>AutoVoiden</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>半角カナを〓に置き換えるよ</h1>
-    <form action="" method="GET">
-    <textarea name="body">[% $body // '' %]</textarea>
-    <input type="submit" />
-    <hr />
-    <p>[% $transformed // '(text)' %]</p>
-    </form>
-</body>
-</html>
