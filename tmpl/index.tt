@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <met charst="utf-8">
-    <title>AutoVoiden</title>
+    <meta charst="utf-8">
+    <title>半角カナを〓に置き換えるよ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>半角カナを〓に置き換えるよ</h1>
+    <h1><a href="">半角カナを〓に置き換えるよ</a></h1>
     <form action="" method="GET">
     <textarea name="body">[% $body // '' %]</textarea>
     <input type="submit" />
