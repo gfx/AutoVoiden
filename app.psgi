@@ -24,7 +24,7 @@ sub transform {
 
 get '/' => sub {
     my $c = shift;
-    my $body = $c->request->param('body');
+    my $body = $c->request->param('body') // '';
     my %param = (
         body        => $body,
         transformed => transform($body),

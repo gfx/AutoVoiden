@@ -11,7 +11,7 @@
     <textarea name="body">[% $body // '' %]</textarea>
     <input type="submit" />
     <hr />
-    <p>[% $transformed // '(text)' %]</p>
+    <p style="width: 100em">[% $transformed // '(text)' %]</p>
     </form>
 </body>
 </html>
