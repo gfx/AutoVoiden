@@ -13,10 +13,23 @@ sub config {
     +{
     }
 }
+sub InHankakuKatakana { "FF65\tFF9F" }
+
+sub transform {
+    my($s) = @_;
+    $s =~ s/\p{InHankakuKatakana}/〓/g;
+    return $s;
+}
 
 get '/' => sub {
     my $c = shift;
-    return $c->render('index.tt');
+    my $body = $c->request->param('body');
+    my %param = (
+        body        => $body,
+        transformed => transform($body),
+    );
+
+    return $c->render('index.tt', \%param);
 };
 
 # for your security
@@ -29,16 +42,16 @@ __PACKAGE__->add_trigger(
 );
 
 # load plugins
-__PACKAGE__->load_plugins(
-    'Web::CSRFDefender',
-);
+#__PACKAGE__->load_plugins(
+#    'Web::CSRFDefender',
+#);
 
 builder {
     enable 'Plack::Middleware::Static',
         path => qr{^(?:/static/|/robot\.txt$|/favicon\.ico$)},
         root => File::Spec->catdir(dirname(__FILE__));
     enable 'Plack::Middleware::ReverseProxy';
-    enable 'Plack::Middleware::Session';
+    #enable 'Plack::Middleware::Session';
 
     __PACKAGE__->to_app();
 };
@@ -54,6 +67,12 @@ __DATA__
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    AutoVoiden
+    <h1>半角カナを〓に置き換えるよ</h1>
+    <form action="" method="GET">
+    <textarea name="body">[% $body // '' %]</textarea>
+    <input type="submit" />
+    <hr />
+    <p>[% $transformed // '(text)' %]</p>
+    </form>
 </body>
 </html>
